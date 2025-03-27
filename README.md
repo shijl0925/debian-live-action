@@ -1,5 +1,5 @@
 # debian-live
-Builds a Debian 10 (Buster) Live x86-64 ISO monthly using GitHub Actions. Used primarily for backing up and restoring Linux and Windows based systems.
+Builds a Debian 12 (Bookworm) Live x86-64 ISO monthly using GitHub Actions. Used primarily for backing up and restoring Linux and Windows based systems.
 
 
 ## Default Password

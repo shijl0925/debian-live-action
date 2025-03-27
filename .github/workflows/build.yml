@@ -30,6 +30,13 @@ jobs:
         run: |
           ./build.sh
 
+      - name: "Delete date-stamped tag if it already exists."
+        uses: cb80/delrel@latest
+        continue-on-error: true
+        with:
+          tag: "${{ env.DATESTAMP }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: "Publish"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
