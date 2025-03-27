@@ -19,7 +19,7 @@ dpkg-reconfigure --frontend=noninteractive locales
 update-locale LANG=en_US.UTF-8
 
 echo Install packages
-apt-get install -y --no-install-recommends linux-image-amd64 live-boot systemd-sysv
+apt-get install -y --no-install-recommends linux-image-arm64 live-boot systemd-sysv
 apt-get install -y \
   bash-completion \
   cifs-utils \

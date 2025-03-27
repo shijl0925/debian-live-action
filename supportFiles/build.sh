@@ -4,13 +4,13 @@ set -e
 
 echo Install required tools
 apt-get update
-apt-get -y install debootstrap squashfs-tools xorriso isolinux syslinux-efi  grub-pc-bin grub-efi-amd64-bin mtools dosfstools
+apt-get -y install debootstrap squashfs-tools xorriso isolinux syslinux-efi  grub-pc-bin grub-efi-arm64-bin mtools dosfstools
 
 echo Create directory where we will make the image
 mkdir -p $HOME/LIVE_BOOT
 
 echo Install Debian
-debootstrap --arch=amd64 --variant=minbase bookworm $HOME/LIVE_BOOT/chroot http://ftp.us.debian.org/debian/
+debootstrap --arch=arm64 --variant=minbase bookworm $HOME/LIVE_BOOT/chroot http://ftp.us.debian.org/debian/
 
 echo Copy supporting documents into the chroot
 cp -v /supportFiles/installChroot.sh $HOME/LIVE_BOOT/chroot/installChroot.sh
@@ -43,7 +43,7 @@ umount $HOME/LIVE_BOOT/chroot/dev
 umount $HOME/LIVE_BOOT/chroot/sys
 
 echo Create directories that will contain files for our live environment files and scratch files.
-mkdir -p $HOME/LIVE_BOOT/{staging/{EFI/boot,boot/grub/x86_64-efi,isolinux,live},tmp}
+mkdir -p $HOME/LIVE_BOOT/{staging/{EFI/boot,boot/grub/arm64-efi,isolinux,live},tmp}
 
 echo Compress the chroot environment into a Squash filesystem.
 mksquashfs $HOME/LIVE_BOOT/chroot $HOME/LIVE_BOOT/staging/live/filesystem.squashfs -e boot
@@ -61,10 +61,10 @@ touch $HOME/LIVE_BOOT/staging/DEBIAN_CUSTOM
 echo Copy boot images
 cp -v /usr/lib/ISOLINUX/isolinux.bin "${HOME}/LIVE_BOOT/staging/isolinux/"
 cp -v /usr/lib/syslinux/modules/bios/* "${HOME}/LIVE_BOOT/staging/isolinux/"
-cp -v -r /usr/lib/grub/x86_64-efi/* "${HOME}/LIVE_BOOT/staging/boot/grub/x86_64-efi/"
+cp -v -r /usr/lib/grub/arm64-efi/* "${HOME}/LIVE_BOOT/staging/boot/grub/arm64-efi/"
 
 echo Make UEFI grub files
-grub-mkstandalone --format=x86_64-efi --output=$HOME/LIVE_BOOT/tmp/bootx64.efi --locales=""  --fonts="" "boot/grub/grub.cfg=$HOME/LIVE_BOOT/tmp/grub-standalone.cfg"
+grub-mkstandalone --format=arm64-efi --output=$HOME/LIVE_BOOT/tmp/bootx64.efi --locales=""  --fonts="" "boot/grub/grub.cfg=$HOME/LIVE_BOOT/tmp/grub-standalone.cfg"
 
 cd $HOME/LIVE_BOOT/staging/EFI/boot
 SIZE=`expr $(stat --format=%s $HOME/LIVE_BOOT/tmp/bootx64.efi) + 65536`
@@ -95,6 +95,6 @@ xorriso \
     "${HOME}/LIVE_BOOT/staging"
 
 echo Copy output
-cp -v $HOME/LIVE_BOOT/debian-custom.iso /output/debian12-live-minimal-x86_64.iso
-chmod -v 666 /output/debian12-live-minimal-x86_64.iso
+cp -v $HOME/LIVE_BOOT/debian-custom.iso /output/debian12-live-minimal-arm64.iso
+chmod -v 666 /output/debian12-live-minimal-arm64.iso
 ls -lah /output

@@ -46,5 +46,5 @@ jobs:
           automatic_release_tag: "${{ env.DATESTAMP }}"
           title: "Debian 12 Live Minimal ISO"
           files: |
-            output/debian12-live-minimal-x86_64.iso
+            output/debian12-live-minimal-arm64.iso
             output/packages.txt

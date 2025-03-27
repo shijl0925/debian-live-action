@@ -2,7 +2,7 @@ name: "Build Debian Live Minimal ISO"
 
 on:
   push:
-    branches: [dev]
+    branches: [arm64-dev]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'

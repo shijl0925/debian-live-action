@@ -1,5 +1,5 @@
 # debian-live
-Builds a Debian 12 (Bookworm) Live x86-64 ISO monthly using GitHub Actions. Used primarily for backing up and restoring Linux and Windows based systems.
+Builds a Debian 12 (Bookworm) Live arm64 ISO monthly using GitHub Actions. Used primarily for backing up and restoring Linux and Windows based systems.
 
 
 ## Default Password
@@ -44,7 +44,7 @@ wimtools - Create, restore, and manage `WIM` files for Windows based systems.
 * iputils-ping
 * isc-dhcp-client
 * less
-* linux-image-amd64
+* linux-image-arm64
 * live-boot
 * nfs-common
 * ntfs-3g
