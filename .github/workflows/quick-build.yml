@@ -10,7 +10,14 @@ on:
 jobs:
   build:
     name: "Build"
-    runs-on: "ubuntu-20.04-arm"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          # - os: ubuntu-22.04
+          #   arch: amd64
+          - os: ubuntu-22.04-arm
+            arch: arm64
 
     steps:
       - name: "Checking out git repository"
