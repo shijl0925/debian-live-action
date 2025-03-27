@@ -1,0 +1,22 @@
+name: "Build Debian Live Minimal ISO"
+
+on:
+  push:
+    branches: [dev]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+
+jobs:
+  build:
+    name: "Build"
+    runs-on: "ubuntu-20.04"
+
+    steps:
+      - name: "Checking out git repository"
+        uses: actions/checkout@v2
+
+      - name: "Build Image"
+        run: |
+          ./build.sh
+
