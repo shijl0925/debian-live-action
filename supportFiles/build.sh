@@ -4,7 +4,7 @@ set -e
 
 echo Install required tools
 apt-get update
-apt-get -y install debootstrap squashfs-tools xorriso isolinux syslinux-efi  grub-pc-bin grub-efi-arm64-bin mtools dosfstools
+apt-get -y install debootstrap squashfs-tools xorriso isolinux syslinux-efi grub-efi-arm64-bin mtools dosfstools
 
 echo Create directory where we will make the image
 mkdir -p $HOME/LIVE_BOOT
